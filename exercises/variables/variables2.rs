@@ -3,6 +3,7 @@
 // Execute `rustlings hint variables2` or use the `hint` watch subcommand for a
 // hint.
 
+//no change
 
 fn main() {
     let x = 10;
