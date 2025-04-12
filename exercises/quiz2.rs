@@ -42,7 +42,7 @@ mod my_module {
                 Command::Trim => string.trim().to_string(),
                 Command::Append(n) => {
                     let mut s = string.clone();
-                    for _ in 0..*n {
+                    for _ in 0..n {
                         s.push_str("bar");
                     }
                     s

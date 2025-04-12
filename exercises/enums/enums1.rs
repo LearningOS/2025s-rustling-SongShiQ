@@ -12,7 +12,7 @@ enum Message {
 
 fn main() {
     println!("{:?}", Message::Quit);
-    println!("{:?}", Message::Echo);
-    println!("{:?}", Message::Move);
-    println!("{:?}", Message::ChangeColor);
+    println!("{:?}", Message::Echo("Hello World".to_string()));
+    println!("{:?}", Message::Move { x: 10, y: 20 });
+    println!("{:?}", Message::ChangeColor(255, 0, 255));
 }

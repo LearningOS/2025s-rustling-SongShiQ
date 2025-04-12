@@ -9,19 +9,20 @@
 fn main() {
     let data = "Rust is great!".to_string();
 
-    get_char(&data);
+    get_char(&data);  // 正确：传递引用
 
-    string_uppercase(data);
+    // 传递所有权给 string_uppercase
+    string_uppercase(data);  // 正确：传递所有权
 }
 
-// Should not take ownership
+// get_char 接受引用，不需要修改
 fn get_char(data: &String) -> char {
     data.chars().last().unwrap()
 }
 
-// Should take ownership
+// string_uppercase 需要获取所有权
 fn string_uppercase(mut data: String) {
-    data.to_uppercase();
+    data.to_uppercase();  // 转换为大写
 
-    println!("{}", data);
+    println!("{}", data);  // 打印转换后的字符串
 }

@@ -2,11 +2,10 @@
 	single linked list merge
 	This problem requires you to merge two ordered singly linked lists into one ordered singly linked list
 */
-// I AM NOT DONE
+
 
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
-use std::vec::*;
 
 #[derive(Debug)]
 struct Node<T> {
@@ -69,15 +68,38 @@ impl<T> LinkedList<T> {
             },
         }
     }
-	pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
-	{
-		//TODO
-		Self {
-            length: 0,
-            start: None,
-            end: None,
+	pub fn merge(mut list_a:LinkedList<T>,mut list_b:LinkedList<T>) -> Self
+	where
+        T: Ord,
+    {
+        let mut merged_list = LinkedList::new();
+
+        let mut a = list_a.start.take();
+        let mut b = list_b.start.take();
+
+        while let (Some(a_ptr), Some(b_ptr)) = (a, b) {
+            let a_ref = unsafe { &*a_ptr.as_ptr() };
+            let b_ref = unsafe { &*b_ptr.as_ptr() };
+
+            if a_ref.val <= b_ref.val {
+                merged_list.add(unsafe { std::ptr::read(&a_ref.val) });
+                a = a_ref.next;
+            } else {
+                merged_list.add(unsafe { std::ptr::read(&b_ref.val) });
+                b = b_ref.next;
+            }
         }
-	}
+
+        let mut rest = if a.is_some() { a } else { b };
+
+        while let Some(node_ptr) = rest {
+            let node_ref = unsafe { &*node_ptr.as_ptr() };
+            merged_list.add(unsafe { std::ptr::read(&node_ref.val) });
+            rest = node_ref.next;
+        }
+
+        merged_list
+    }
 }
 
 impl<T> Display for LinkedList<T>
