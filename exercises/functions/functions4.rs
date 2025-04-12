@@ -8,6 +8,7 @@
 // Execute `rustlings hint functions4` or use the `hint` watch subcommand for a
 // hint.
 
+//no change
 
 fn main() {
     let original_price = 51;
