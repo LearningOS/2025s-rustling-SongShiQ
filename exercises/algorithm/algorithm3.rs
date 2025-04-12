@@ -5,8 +5,18 @@
 */
 
 
-fn sort<T>(array: &mut [T]){
-	//TODO
+fn sort<T>(array: &mut [T])
+where
+T: Ord, // 确保T类型支持比较操作
+{
+let n = array.len();
+for i in 0..n {
+    for j in 0..(n - 1 - i) {
+        if array[j] > array[j + 1] {
+            array.swap(j, j + 1);
+        }
+    }
+}
 }
 #[cfg(test)]
 mod tests {

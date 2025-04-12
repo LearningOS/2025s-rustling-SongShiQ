@@ -30,7 +30,7 @@
 unsafe fn modify_by_address(address: usize) {
     let ptr = address as *mut u32;
     unsafe {
-        todo!("Your code goes here")
+        *ptr = 0xAABBCCDD;
     }
 }
 

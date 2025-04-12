@@ -5,12 +5,11 @@ use std::time::SystemTime;
 
 fn main() {
     // 设置环境变量 TEST_FOO，值为当前的时间戳
-    let timestamp = SystemTime::now()
-        .duration_since(SystemTime::UNIX_EPOCH)
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         .as_secs();
-    println!("cargo:rerun-if-env-changed=TEST_FOO"); // 当 TEST_FOO 环境变量改变时，重新运行 build.rs
-    println!("cargo:TEST_FOO={}", timestamp); // 设置 TEST_FOO 为当前时间戳
+    println!("cargo:rustc-env=TEST_FOO={}", now);
 
     // 启用 `pass` 特性，在 `tests8.rs` 中返回时测试通过
     let enable_pass_feature = "cargo:rustc-cfg=feature=\"pass\""; // 启用 'pass' 特性

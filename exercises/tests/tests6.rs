@@ -30,7 +30,7 @@ mod tests {
 
     #[test]
     fn test_success() {
-        let data = Box::new(Foo { a: 1, b: None });
+        let data = Box::new(Foo { a: 1, b: Some("hello".to_owned())  });
 
         let ptr_1 = &data.a as *const u128 as usize;
         // SAFETY: We pass an owned box of `Foo`.
