@@ -50,9 +50,10 @@ pub trait Graph {
     fn new() -> Self;
     fn adjacency_table_mutable(&mut self) -> &mut HashMap<String, Vec<(String, i32)>>;
     fn adjacency_table(&self) -> &HashMap<String, Vec<(String, i32)>>;
-    fn add_node(&mut self, node: &str) -> bool {
-        
-		true
+    fn add_node(&mut self, node: &str)  {
+        self.adjacency_table_mutable()
+            .entry(node.to_string())
+            .or_insert_with(Vec::new);
     }
     fn add_edge(&mut self, edge: (&str, &str, i32)) ;
     fn contains(&self, node: &str) -> bool {
